@@ -69,6 +69,20 @@ class TodoApp extends React.Component {
 
   save() {
     console.log("In save");
+    fetch("/list/save", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({items: this.state.items})
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((jsonResponse) => {
+      console.log("json response:", jsonResponse);
+    });
   }
 
   addItem() {
@@ -114,6 +128,16 @@ class TodoApp extends React.Component {
     items.splice(index, 1);
     
     this.setState({items: items});
+  }
+
+  componentDidMount() {
+    fetch("/list/items")
+    .then((response) => {
+      return response.json();
+    }) 
+    .then((jsonResponse) => {
+      this.setState({items: jsonResponse.items});
+    }); 
   }
 }
 
