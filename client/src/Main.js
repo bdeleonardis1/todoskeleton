@@ -42,6 +42,37 @@ function List(props) {
   );
 }
 
+class AddItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+  }
+
+  render() {
+    return (
+      <div>
+          <input id="addItemBox" type="text" onKeyPress={this.handleKeyPress}/>
+          <button onClick={this.props.onClick}>Add</button>
+      </div>
+    ); 
+  }
+  
+  handleKeyPress(event) {
+    if (event.key == 'Enter') {
+      this.props.onClick();
+    }
+  }
+}
+
+function SaveChanges(props) {
+  return (
+    <div className="save">
+      <button onClick={props.save}>Save Changes</button>
+    </div>
+  )
+}
+
 class TodoApp extends React.Component {
   constructor(props) {
     super(props);
@@ -115,37 +146,6 @@ class TodoApp extends React.Component {
     
     this.setState({items: items});
   }
-}
-
-class AddItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleKeyPress = this.handleKeyPress.bind(this);
-  }
-
-  render() {
-    return (
-      <div>
-          <input id="addItemBox" type="text" onKeyPress={this.handleKeyPress}/>
-          <button onClick={this.props.onClick}>Add</button>
-      </div>
-    ); 
-  }
-  
-  handleKeyPress(event) {
-    if (event.key == 'Enter') {
-      this.props.onClick();
-    }
-  }
-}
-
-function SaveChanges(props) {
-  return (
-    <div className="save">
-      <button onClick={props.save}>Save Changes</button>
-    </div>
-  )
 }
  
 function Main() {
