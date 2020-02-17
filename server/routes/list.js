@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-var items = [];
-
 router.get("/hello", (req, res) => {
     res.send("Hello world");
 });
